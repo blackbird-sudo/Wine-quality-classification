@@ -1,3 +1,6 @@
+A machine learning project that predicts wine quality ratings using chemical properties. The system employs XGBoost with comprehensive data preprocessing, achieving high-precision classification through feature scaling, cross-validation, and robust model evaluation.
+
+
 # Wine-quality-classification
 <br>
 import pandas as pd
