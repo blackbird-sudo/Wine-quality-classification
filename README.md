@@ -94,27 +94,34 @@ def data_preprocessing(x,y):
 
    scaler=StandardScaler()
    x_train_scaled = scaler.fit_transform(x_train)
+
    x_test_scaled = scaler.transform(x_test)
 
    return x_train_scaled,x_test_scaled,y_train,y_test,scaler
 
   #Model training evaluation
 file_path="C:/Users/user/Downloads/Wine quality classification.csv"
+
 x, y, target_names, df, target_column = load_data_from_csv(file_path)
+
 df = perform_eda(df, target_column, target_names)
 
 # Remap class label
 le=LabelEncoder()
+
 y_original=y.copy()
+
 y=le.fit_transform(y)
 
 x_train_scaled, x_test_scaled, y_train, y_test, scaler = data_preprocessing(x,y)
 
 model = XGBClassifier(random_state=42, use_label_encoder= False , eval_metric='mlogloss')
+
 model.fit(x_train_scaled, y_train)
 
 
 y_pred=model.predict(x_test_scaled)
+
 y_pred_prob=model.predict_proba(x_test_scaled)  
 
 
@@ -123,22 +130,37 @@ y_pred_prob=model.predict_proba(x_test_scaled)
 #calculate metrices
 
 accuracy=accuracy_score(y_test,y_pred)
+
 precision=precision_score(y_test,y_pred,average='weighted')
+
 recall=recall_score(y_test,y_pred,average='weighted')
+
 f1=f1_score(y_test,y_pred,average='weighted')
+
 print(accuracy,precision,recall,f1)
  
 # Cross validation Score
+
 cv_scores=cross_val_score(model,x_train_scaled,y_train,cv=5)
+
 cv_mean=cv_scores.mean()
+
 print(cv_scores,cv_mean)
 
 
 #save the model
+
 import joblib
+
 model_filename='wine quality classification'
+
 scaler_filename='standard_scaler'
+
 joblib.dump(model,model_filename)
+
 joblib.dump(scaler,scaler_filename)
+
 print("Model and scaler saved")
+
 print(model_filename,scaler_filename)
+
