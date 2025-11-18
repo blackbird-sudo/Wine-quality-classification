@@ -69,11 +69,13 @@ def perform_eda(df, target_column , target_names):
     print("Missing values is:{missing_value}") 
 
     if missing_value.sum()>0 :
+    
    # Fill the numerical column with mean
-      numerical_cols=df.select_dtype(include=[np.number]).columns
+       numerical_cols=df.select_dtype(include=[np.number]).columns
       df[numerical_cols]=df[numerical_cols].fillna(df[numerical_cols].mean())
 
    #Fill cathegorical column with mode
+   
     categorical_cols=df.select_dtype(include=['object']).columns
     for col in categorical_cols:
      if col!=  target_column:
@@ -84,8 +86,9 @@ def perform_eda(df, target_column , target_names):
 
 # Data preprocessing
 def data_preprocessing(x,y):
+
    
-   x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=.2 , random_state=42)
+    x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=.2 , random_state=42)
 
   # Scale the feature
 
@@ -118,6 +121,7 @@ y_pred_prob=model.predict_proba(x_test_scaled)
 
 
 #calculate metrices
+
 accuracy=accuracy_score(y_test,y_pred)
 precision=precision_score(y_test,y_pred,average='weighted')
 recall=recall_score(y_test,y_pred,average='weighted')
