@@ -94,6 +94,7 @@ def data_preprocessing(x,y):
   # Scale the feature
 
    scaler=StandardScaler()
+   
    x_train_scaled = scaler.fit_transform(x_train)
 
    x_test_scaled = scaler.transform(x_test)
