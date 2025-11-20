@@ -26,6 +26,7 @@ import warnings
 warnings.filterwarnings('ignore')
 <br>
 def load_data_from_csv(file_path, target_column=None):
+
     try: 
         df = pd.read_csv(file_path)  
         print(df.columns)
